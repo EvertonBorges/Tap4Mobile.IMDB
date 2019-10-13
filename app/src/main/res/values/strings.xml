@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Tap4Mobile.IMDB</string>
+    <string name="textApiKey">API KEY</string>
+    <string name="textEntrar">Entrar</string>
 </resources>
