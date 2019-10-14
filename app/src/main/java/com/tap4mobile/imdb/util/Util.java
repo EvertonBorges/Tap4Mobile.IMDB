@@ -1,5 +1,6 @@
 package com.tap4mobile.imdb.util;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,7 +10,15 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.tap4mobile.imdb.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Objects;
+
 public class Util {
+
+    @SuppressLint("SimpleDateFormat")
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public static ProgressDialog inicializaProgressDialog(Context context, String title, String message) {
         ProgressDialog progressDialog = new ProgressDialog(context);
@@ -59,6 +68,19 @@ public class Util {
                               //.setView()
                               //.setIcon()
                               .setPositiveButton("OK", listener != null ? listener : (dialog, which) -> dialog.dismiss());
+    }
+
+    public static String extractYear(String data) {
+        try {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(Objects.requireNonNull(sdf.parse(data)));
+
+            return String.valueOf(calendar.get(Calendar.YEAR));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return "";
     }
 
 }

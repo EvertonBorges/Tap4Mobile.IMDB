@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="topRatedTitle">28sp</dimen>
+    <dimen name="movieTitle">22sp</dimen>
+    <dimen name="movieDescription">16sp</dimen>
+
+</resources>

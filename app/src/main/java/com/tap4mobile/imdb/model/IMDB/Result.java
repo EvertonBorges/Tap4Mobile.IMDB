@@ -1,6 +1,12 @@
 package com.tap4mobile.imdb.model.IMDB;
 
-public class Result {
+import android.graphics.Bitmap;
+
+import com.tap4mobile.imdb.util.Util;
+
+import java.io.Serializable;
+
+public class Result implements Serializable {
 
     private static final String baseImagePath = "https://image.tmdb.org/t/p/w500";
 
@@ -18,6 +24,7 @@ public class Result {
     private Integer vote_count;
     private boolean video;
     private Double vote_average;
+    private Bitmap posterBitmap;
 
     public Result() {
     }
@@ -132,5 +139,17 @@ public class Result {
 
     public void setVote_average(Double vote_average) {
         this.vote_average = vote_average;
+    }
+
+    public Bitmap getPosterBitmap() {
+        return posterBitmap;
+    }
+
+    public void setPosterBitmap(Bitmap posterBitmap) {
+        this.posterBitmap = posterBitmap;
+    }
+
+    public String getYear(){
+        return "(" + Util.extractYear(release_date) + ")";
     }
 }
