@@ -30,7 +30,7 @@ public class MovieDetailsAsync extends AsyncTask<String, Void, MovieDetails> {
     private void configHttpUrlConnection(HttpURLConnection connection) throws ProtocolException {
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Content-type", "application/json");
-        connection.setDoOutput(true);
+        connection.setDoOutput(false);
         connection.setConnectTimeout(5000);
     }
 
@@ -73,6 +73,8 @@ public class MovieDetailsAsync extends AsyncTask<String, Void, MovieDetails> {
             }
             return null;
         }
+
+
         return MovieDetails.JsonToObject(buffer.toString());
     }
 

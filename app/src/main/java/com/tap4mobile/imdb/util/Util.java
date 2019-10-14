@@ -17,6 +17,8 @@ import java.util.Objects;
 
 public class Util {
 
+    public static final String BASE_IMAGE_PATH = "https://image.tmdb.org/t/p/w500";
+
     @SuppressLint("SimpleDateFormat")
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -81,6 +83,15 @@ public class Util {
         }
 
         return "";
+    }
+
+    public static String minutesToDuration(Integer minutes){
+        int hours = 0;
+        while (minutes >= 60) {
+            hours++;
+            minutes -= 60;
+        }
+        return hours + " h " + minutes + " min";
     }
 
 }

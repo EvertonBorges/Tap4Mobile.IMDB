@@ -52,7 +52,7 @@ public class TopRatedAdapter extends ArrayAdapter<Result> {
 
             view.setOnClickListener(v -> {
                 Intent intent = new Intent(context, MovieDetailsActivity.class);
-                intent.putExtra("result", result);
+                intent.putExtra("movieId", result.getId());
                 context.startActivity(intent);
             });
         }

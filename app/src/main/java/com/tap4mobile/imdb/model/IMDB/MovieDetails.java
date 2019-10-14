@@ -1,6 +1,9 @@
 package com.tap4mobile.imdb.model.IMDB;
 
+import android.graphics.Bitmap;
+
 import com.google.gson.Gson;
+import com.tap4mobile.imdb.util.Util;
 
 public class MovieDetails {
 
@@ -17,12 +20,12 @@ public class MovieDetails {
     private String overview;
     private Double popularity;
     private String poster_path;
-    private production_companie production_companies;
-    private production_countrie production_countries;
+    private production_companie[] production_companies;
+    private production_countrie[] production_countries;
     private String release_date;
     private Integer revenue;
     private Integer runtime;
-    private spoken_language spoken_languages;
+    private spoken_language[] spoken_languages;
     private String status;
     private String tagline;
     private boolean video;
@@ -41,7 +44,7 @@ public class MovieDetails {
     }
 
     public String getBackdrop_path() {
-        return backdrop_path;
+        return Util.BASE_IMAGE_PATH + backdrop_path;
     }
 
     public void setBackdrop_path(String backdrop_path) {
@@ -129,26 +132,26 @@ public class MovieDetails {
     }
 
     public String getPoster_path() {
-        return poster_path;
+        return Util.BASE_IMAGE_PATH + poster_path;
     }
 
     public void setPoster_path(String poster_path) {
         this.poster_path = poster_path;
     }
 
-    public production_companie getProduction_companies() {
+    public production_companie[] getProduction_companies() {
         return production_companies;
     }
 
-    public void setProduction_companies(production_companie production_companies) {
+    public void setProduction_companies(production_companie[] production_companies) {
         this.production_companies = production_companies;
     }
 
-    public production_countrie getProduction_countries() {
+    public production_countrie[] getProduction_countries() {
         return production_countries;
     }
 
-    public void setProduction_countries(production_countrie production_countries) {
+    public void setProduction_countries(production_countrie[] production_countries) {
         this.production_countries = production_countries;
     }
 
@@ -176,11 +179,11 @@ public class MovieDetails {
         this.runtime = runtime;
     }
 
-    public spoken_language getSpoken_languages() {
+    public spoken_language[] getSpoken_languages() {
         return spoken_languages;
     }
 
-    public void setSpoken_languages(spoken_language spoken_languages) {
+    public void setSpoken_languages(spoken_language[] spoken_languages) {
         this.spoken_languages = spoken_languages;
     }
 
@@ -222,6 +225,14 @@ public class MovieDetails {
 
     public void setVote_count(Integer vote_count) {
         this.vote_count = vote_count;
+    }
+
+    public String getYear(){
+        return "(" + Util.extractYear(release_date) + ")";
+    }
+
+    public String getDuration() {
+        return Util.minutesToDuration(getRuntime());
     }
 
     public static MovieDetails JsonToObject(String json) {

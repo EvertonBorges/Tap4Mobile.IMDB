@@ -8,8 +8,6 @@ import java.io.Serializable;
 
 public class Result implements Serializable {
 
-    private static final String baseImagePath = "https://image.tmdb.org/t/p/w500";
-
     private String poster_path;
     private boolean adult;
     private String overview;
@@ -30,7 +28,7 @@ public class Result implements Serializable {
     }
 
     public String getPoster_path() {
-        return baseImagePath + poster_path;
+        return Util.BASE_IMAGE_PATH + poster_path;
     }
 
     public void setPoster_path(String poster_path) {
@@ -102,7 +100,7 @@ public class Result implements Serializable {
     }
 
     public String getBackdrop_path() {
-        return baseImagePath + backdrop_path;
+        return Util.BASE_IMAGE_PATH + backdrop_path;
     }
 
     public void setBackdrop_path(String backdrop_path) {
