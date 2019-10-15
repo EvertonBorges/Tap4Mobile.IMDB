@@ -1,13 +1,10 @@
 package com.tap4mobile.imdb.controller.AsyncTasks;
 
-import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
-import com.tap4mobile.imdb.controller.adapters.TopRatedAdapter;
-import com.tap4mobile.imdb.model.IMDB.IMDBTopRated;
+import com.tap4mobile.imdb.model.IMDB.AlternativeTitle;
 import com.tap4mobile.imdb.model.IMDB.MovieDetails;
-import com.tap4mobile.imdb.model.IMDB.Result;
+import com.tap4mobile.imdb.model.IMDB.Title;
 import com.tap4mobile.imdb.util.Util;
 
 import java.io.BufferedReader;
@@ -17,10 +14,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.util.List;
-import java.util.Objects;
 
-public class MovieDetailsAsync extends AsyncTask<String, Void, MovieDetails> {
+public class MovieAlternativeTitleAsync extends AsyncTask<String, Void, Title[]> {
 
     private void configHttpUrlConnection(HttpURLConnection connection) throws ProtocolException {
         connection.setRequestMethod("GET");
@@ -35,13 +30,13 @@ public class MovieDetailsAsync extends AsyncTask<String, Void, MovieDetails> {
     }
 
     @Override
-    protected MovieDetails doInBackground(String... params) {
+    protected Title[] doInBackground(String... params) {
         HttpURLConnection connection = null;
         BufferedReader reader = null;
         StringBuilder builder = new StringBuilder();
 
         try {
-            URL url = new URL(Util.getBaseMoviePath() + "/" + params[0] + "?api_key=" + params[1] + "&language=" + params[2]);
+            URL url = new URL(Util.getBaseMoviePath() + "/" + params[0] + "/alternative_titles?api_key=" + params[1]);
             connection = (HttpURLConnection) url.openConnection();
             configHttpUrlConnection(connection);
             connection.connect();
@@ -69,8 +64,9 @@ public class MovieDetailsAsync extends AsyncTask<String, Void, MovieDetails> {
             return null;
         }
 
+        AlternativeTitle alternativeTitle = AlternativeTitle.JsonToObject(builder.toString());
 
-        return MovieDetails.JsonToObject(builder.toString());
+        return alternativeTitle.getTitles();
     }
 
 }

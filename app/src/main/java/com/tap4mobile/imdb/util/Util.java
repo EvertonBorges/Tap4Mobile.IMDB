@@ -17,60 +17,11 @@ import java.util.Objects;
 
 public class Util {
 
-    public static final String BASE_IMAGE_PATH = "https://image.tmdb.org/t/p/w500";
+    private static final String BASE_IMAGE_PATH = "https://image.tmdb.org/t/p/w500";
+    private static final String BASE_MOVIE_PATH = "https://api.themoviedb.org/3/movie";
 
     @SuppressLint("SimpleDateFormat")
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-    public static ProgressDialog inicializaProgressDialog(Context context, String title, String message) {
-        ProgressDialog progressDialog = new ProgressDialog(context);
-
-        progressDialog.setIcon(R.drawable.ic_launcher_foreground);
-        progressDialog.setCancelable(false);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-
-        progressDialog.setTitle(title);
-        progressDialog.setMessage(message);
-
-        return progressDialog;
-    }
-
-    public static void finalizarProgressDialog(Handler handler, ProgressDialog progressDialog) {
-        if (progressDialog.isShowing()) {
-            handler.post(progressDialog::dismiss);
-        }
-    }
-
-    public static AlertDialog.Builder AlertaInfo(Context context, String title, String message) {
-        return AlertaInfo(context, title, message, null);
-    }
-
-    public static AlertDialog.Builder AlertaInfo(Context context, String title, String message, DialogInterface.OnClickListener listener) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context)
-                                                     .setTitle(title)
-                                                     .setMessage(message)
-                                                     .setCancelable(true)
-                                                     //.setView()
-                                                     //.setIcon()
-                                                     .setPositiveButton("OK", listener != null ? listener : (dialog, which) -> dialog.dismiss());
-        builder.show();
-
-        return builder;
-    }
-
-    public static AlertDialog.Builder Alerta(Context context, String title, String message) {
-        return Alerta(context, title, message, null);
-    }
-
-    public static AlertDialog.Builder Alerta(Context context, String title, String message, DialogInterface.OnClickListener listener) {
-        return new AlertDialog.Builder(context)
-                              .setTitle(title)
-                              .setMessage(message)
-                              .setCancelable(true)
-                              //.setView()
-                              //.setIcon()
-                              .setPositiveButton("OK", listener != null ? listener : (dialog, which) -> dialog.dismiss());
-    }
 
     public static String extractYear(String data) {
         try {
@@ -94,4 +45,11 @@ public class Util {
         return hours + " h " + minutes + " min";
     }
 
+    public static String getBaseImagePath() {
+        return BASE_IMAGE_PATH;
+    }
+
+    public static String getBaseMoviePath() {
+        return BASE_MOVIE_PATH;
+    }
 }

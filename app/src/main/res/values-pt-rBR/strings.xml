@@ -1,9 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Tap4Mobile.IMDB</string>
     <string name="textApiKey">API KEY</string>
-    <string name="textEntrar">Enter</string>
-    <string name="textTopRated">Top Rated Movies</string>
-    <string name="defaultTitle">Default title extended</string>
+    <string name="textEntrar">Entrar</string>
+    <string name="textTopRated">Melhores Filmes</string>
+    <string name="defaultTitle">Título padrão para o filme</string>
     <string name="defaultYear">(0000)</string>
     <string name="defaultDuration">0h 00 min</string>
     <string name="defaultContentImage">Empty</string>
@@ -11,7 +12,7 @@
     <string name="defaultVoteAverage">10.0</string>
     <string name="defaultVoteCount">1234567</string>
     <string name="defaultMaxVote">/10</string>
-    <string name="languageText">Language</string>
+    <string name="languageText">Idioma</string>
     <string-array name="language_array">
         <item>English</item>
         <item>Portuguese</item>

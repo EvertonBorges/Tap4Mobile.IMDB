@@ -28,7 +28,7 @@ public class Result implements Serializable {
     }
 
     public String getPoster_path() {
-        return Util.BASE_IMAGE_PATH + poster_path;
+        return Util.getBaseImagePath() + poster_path;
     }
 
     public void setPoster_path(String poster_path) {
@@ -100,7 +100,7 @@ public class Result implements Serializable {
     }
 
     public String getBackdrop_path() {
-        return Util.BASE_IMAGE_PATH + backdrop_path;
+        return Util.getBaseImagePath() + backdrop_path;
     }
 
     public void setBackdrop_path(String backdrop_path) {

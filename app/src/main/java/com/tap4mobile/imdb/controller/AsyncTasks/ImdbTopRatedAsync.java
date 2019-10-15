@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.tap4mobile.imdb.controller.adapters.TopRatedAdapter;
 import com.tap4mobile.imdb.model.IMDB.IMDBTopRated;
 import com.tap4mobile.imdb.model.IMDB.Result;
+import com.tap4mobile.imdb.util.Util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -40,8 +41,6 @@ public class ImdbTopRatedAsync extends AsyncTask<String, Void, String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-
-
     }
 
     @Override
@@ -50,7 +49,7 @@ public class ImdbTopRatedAsync extends AsyncTask<String, Void, String> {
         BufferedReader reader = null;
 
         try {
-            URL url = new URL("https://api.themoviedb.org/3/movie/top_rated?api_key=" + params[0] + "&language=" + params[1] + "&page" + params[2]);
+            URL url = new URL(Util.getBaseMoviePath() + "/top_rated?api_key=" + params[0] + "&language=" + params[1] + "&page" + params[2]);
             connection = (HttpURLConnection) url.openConnection();
             configHttpUrlConnection(connection);
             connection.connect();
@@ -58,12 +57,12 @@ public class ImdbTopRatedAsync extends AsyncTask<String, Void, String> {
             InputStream inputStream = connection.getInputStream();
             reader = new BufferedReader(new InputStreamReader(inputStream));
             String linha;
-            StringBuffer buffer = new StringBuffer();
+            StringBuilder builder = new StringBuilder();
             while((linha = reader.readLine()) != null) {
-                buffer.append(linha);
-                buffer.append("\n");
+                builder.append(linha);
+                builder.append("\n");
             }
-            return buffer.toString();
+            return builder.toString();
         } catch (Exception e) {
             e.printStackTrace();
             if (connection != null) {
@@ -84,8 +83,6 @@ public class ImdbTopRatedAsync extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String dados) {
         results.clear();
 
-        System.out.println("JSON: " + dados);
-
         IMDBTopRated topRateds = IMDBTopRated.JsonToObject(dados);
 
         if (topRateds != null) {
@@ -97,7 +94,7 @@ public class ImdbTopRatedAsync extends AsyncTask<String, Void, String> {
                 new DownloadImageAsync(adapter, result).execute();
             }
         } else {
-            Toast.makeText(context, "Por favor conecte-se a Internet", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Por favor verificar conexão com a internet ou API KEY é inválida", Toast.LENGTH_LONG).show();
         }
     }
 
