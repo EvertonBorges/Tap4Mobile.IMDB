@@ -2,6 +2,8 @@ package com.tap4mobile.imdb.controller.AsyncTasks;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.tap4mobile.imdb.controller.adapters.TopRatedAdapter;
@@ -24,11 +26,13 @@ public class ImdbTopRatedAsync extends AsyncTask<String, Void, String> {
     private Context context;
     private TopRatedAdapter adapter;
     private List<Result> results;
+    private ProgressBar progressBar;
 
-    public ImdbTopRatedAsync(Context context, TopRatedAdapter adapter, List<Result> results){
+    public ImdbTopRatedAsync(Context context, TopRatedAdapter adapter, List<Result> results, ProgressBar progressBar){
         this.context = context;
         this.adapter = adapter;
         this.results = results;
+        this.progressBar = progressBar;
     }
 
     private void configHttpUrlConnection(HttpURLConnection connection) throws ProtocolException {
@@ -41,6 +45,7 @@ public class ImdbTopRatedAsync extends AsyncTask<String, Void, String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -96,6 +101,8 @@ public class ImdbTopRatedAsync extends AsyncTask<String, Void, String> {
         } else {
             Toast.makeText(context, "Por favor verificar conexão com a internet ou API KEY é inválida", Toast.LENGTH_LONG).show();
         }
+
+        progressBar.setVisibility(View.GONE);
     }
 
 }

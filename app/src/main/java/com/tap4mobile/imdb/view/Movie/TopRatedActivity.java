@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.tap4mobile.imdb.R;
 import com.tap4mobile.imdb.controller.AsyncTasks.ImdbTopRatedAsync;
@@ -19,6 +20,7 @@ public class TopRatedActivity extends AppCompatActivity {
 
     private List<Result> results = new ArrayList<>();
     private ListView lvMovies;
+    private ProgressBar pbLoadMovies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,7 @@ public class TopRatedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_top_rated);
 
         lvMovies = findViewById(R.id.lvTopRatedMovies);
+        pbLoadMovies = findViewById(R.id.pbLoadMovies);
 
         preconfigs();
     }
@@ -35,7 +38,7 @@ public class TopRatedActivity extends AppCompatActivity {
         lvMovies.setAdapter(adapter);
 
         PreferenciesShared preferencias = new PreferenciesShared(TopRatedActivity.this);
-        new ImdbTopRatedAsync(this, adapter, results).execute(
+        new ImdbTopRatedAsync(this, adapter, results, pbLoadMovies).execute(
                 Base64Custom.decodificarBase64(preferencias.getApiKey()),
                 Base64Custom.decodificarBase64(preferencias.getLanguage()), "1");
     }
