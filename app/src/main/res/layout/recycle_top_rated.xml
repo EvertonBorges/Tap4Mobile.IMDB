@@ -9,7 +9,9 @@
         android:id="@+id/ivPoster"
         android:layout_width="75dp"
         android:layout_height="100dp"
-        android:layout_weight="0"/>
+        android:layout_weight="0"
+        android:src="@drawable/movie"
+        android:contentDescription="@string/defaultContentImage"/>
 
     <LinearLayout
         android:layout_width="match_parent"

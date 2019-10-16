@@ -45,7 +45,9 @@ public class TopRatedAdapter extends ArrayAdapter<Result> {
 
             Result result = results.get(position);
 
-            ivPoster.setImageBitmap(result.getPosterBitmap());
+            if (result.getPosterBitmap() != null) {
+                ivPoster.setImageBitmap(result.getPosterBitmap());
+            }
             actvMovieTitle.setText(result.getTitle());
             actvMovieYear.setText(result.getYear());
             actvMovieDescription.setText(result.getOverview());
